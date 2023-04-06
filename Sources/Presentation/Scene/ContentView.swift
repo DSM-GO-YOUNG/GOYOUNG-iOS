@@ -2,7 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("고용 iOS입니다.")
+        VStack {
+            Text("고용")
+                .font(.suseongBatang(20))
+        }
     }
 }
 
