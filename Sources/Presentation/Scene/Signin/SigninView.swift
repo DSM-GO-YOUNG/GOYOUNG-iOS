@@ -10,8 +10,8 @@ struct SigninView: View {
             Image.logo
                 .frame(width: 149, height: 142)
                 .padding(.bottom, 33)
-            GTextField(placerholder: "이메일", text: $email)
-            GTextField(placerholder: "비밀번호", text: $password)
+            GTextField(placeholder: "이메일", text: $email)
+            GTextField(placeholder: "비밀번호", text: $password)
                 .padding(.bottom, 52)
             GFillButton(title: "로그인", action: { })
             Spacer()

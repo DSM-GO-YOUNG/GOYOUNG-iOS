@@ -11,9 +11,9 @@ struct SignupView: View {
                 .frame(height: 50)
             Image.logo
                 .frame(width: 149, height: 142)
-            GTextField(placerholder: "전화번호", text: $phoneNumber)
-            GTextField(placerholder: "비밀번호", text: $password)
-            GTextField(placerholder: "이름", text: $name)
+            GTextField(placeholder: "전화번호", text: $phoneNumber)
+            GTextField(placeholder: "비밀번호", text: $password)
+            GTextField(placeholder: "이름", text: $name)
                 .padding(.bottom, 33)
             GFillButton(title: "회원가입", action: { })
                 .padding(.bottom, 53)
