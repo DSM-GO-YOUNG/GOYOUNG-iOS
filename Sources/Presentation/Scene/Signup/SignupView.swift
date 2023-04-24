@@ -2,24 +2,22 @@ import SwiftUI
 
 struct SignupView: View {
     @State var phoneNumber: String = ""
-    @State var email: String = ""
+    @State var password: String = ""
     @State var name: String = ""
-    @State var officeName: String = ""
-    @State var officePosition: String = ""
-    @State var officeType: String = ""
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 40) {
             Spacer()
+                .frame(height: 50)
+            Image.logo
+                .frame(width: 149, height: 142)
             GTextField(placerholder: "전화번호", text: $phoneNumber)
-            GTextField(placerholder: "이메일", text: $email)
+            GTextField(placerholder: "비밀번호", text: $password)
             GTextField(placerholder: "이름", text: $name)
-            GTextField(placerholder: "회사명", text: $officeName)
-            GTextField(placerholder: "회사 위치", text: $officePosition)
-            GTextField(placerholder: "회사 종류", text: $officeType)
-                .padding(.bottom, 50)
+                .padding(.bottom, 33)
             GFillButton(title: "회원가입", action: { })
-                .padding(.bottom, 63)
+                .padding(.bottom, 53)
+            Spacer()
         }
         .padding(.horizontal, 16)
         .background(Color.background)
