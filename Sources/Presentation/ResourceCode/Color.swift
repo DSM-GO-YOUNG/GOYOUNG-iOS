@@ -7,4 +7,5 @@ extension Color {
     static let deepPink = Color("DeepPink")
     static let line = Color("Line")
     static let gray100 = Color("Gray100")
+    static let gray200 = Color("Gray200")
 }
