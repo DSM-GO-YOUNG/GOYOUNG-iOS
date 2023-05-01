@@ -10,11 +10,11 @@ struct MainView: View {
         ZStack {
             switch selectedIndex {
             case 0:
-                Color.red
+                ApplicantListView()
             case 1:
-                Color.green
+                HomeView()
             default:
-                Color.blue
+                ProfileView()
             }
             VStack {
                 Spacer()
@@ -28,7 +28,7 @@ struct MainView: View {
                             Text(titleList[index])
                                 .font(.suseongBatang(10))
                         }
-                        .foregroundColor(selectedIndex == index ? .deepPink : .gray100)
+                        .foregroundColor(selectedIndex == index ? .deepPink : .gray200)
                         .onTapGesture {
                             self.selectedIndex = index
                         }
