@@ -1,0 +1,28 @@
+import Foundation
+
+import Combine
+
+protocol Repository {
+    // user
+    func login(phoneNumber: String, password: String) -> AnyPublisher<Void, NetworkError>
+    func signup(phoneNumber: String, password: String, name: String) -> AnyPublisher<Void, NetworkError>
+
+    // company
+    func registrationCompany(name: String, kind: String, explanation: String, address: String) -> AnyPublisher<Void, NetworkError>
+    func searchCompany(word: String) -> AnyPublisher<[CompanyEntity], NetworkError>
+    func fetchCompany() -> AnyPublisher<[CompanyEntity], NetworkError>
+    func fetchCompanyDetail(companyId: String) -> AnyPublisher<CompanyEntity, NetworkError>
+
+    // job-offer
+    func registrationJobOffer(companyId: String, request: JobOfferRequest) -> AnyPublisher<Void, NetworkError>
+    func editJobOffer(jobOfferId: String, request: JobOfferRequest) -> AnyPublisher<Void, NetworkError>
+    func deleteJobOffer(jobOfferId: String) -> AnyPublisher<Void, NetworkError>
+    func fetchJobOffer() -> AnyPublisher<[JobOfferEntity], NetworkError>
+    func fetchJobOfferDetail(jobOfferId: String) -> AnyPublisher<JobOfferEntity, NetworkError>
+    func fetchJobOfferByCompany(companyId: String) -> AnyPublisher<[JobOfferEntity], NetworkError>
+
+    // application
+    func fetchApplicationList(jobOfferId: String) -> AnyPublisher<[ApplicationEntity], NetworkError>
+    func fetchApplicationDetail(applicationId: String) -> AnyPublisher<ApplicationEntity, NetworkError>
+    func registrationResult(applicationId: String, result: ApplicationResultType) -> AnyPublisher<Void, NetworkError>
+}
