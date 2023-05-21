@@ -15,6 +15,7 @@ enum NetworkError: Int, Error {
     case fail = 0
     
     init(_ error: MoyaError) {
+        print(error)
         if error.response == nil {
             self = .notResponse
         } else {
@@ -25,6 +26,7 @@ enum NetworkError: Int, Error {
     }
     
     init(_ error: Error) {
+        print(error)
         if let moyaErr = error as? MoyaError {
             self = NetworkError(moyaErr)
         } else {
