@@ -13,9 +13,9 @@ struct JobOfferResponse: Decodable {
         case welfare
         case condition
         case prefer
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case v = "_v"
+        case createdAt
+        case updatedAt
+        case v = "__v"
     }
     let id: String
     let companyId: String

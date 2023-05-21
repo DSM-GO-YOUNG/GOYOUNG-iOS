@@ -8,9 +8,9 @@ struct CompanyResponse: Decodable {
         case explanation
         case address
         case userId = "user_id"
-        case createAt = "create_at"
-        case updateAt = "update_at"
-        case v = "_v"
+        case createdAt
+        case updatedAt
+        case v = "__v"
     }
     let id: String
     let name: String
@@ -18,8 +18,8 @@ struct CompanyResponse: Decodable {
     let explanation: String
     let address: String
     let userId: String
-    let createAt: String
-    let updateAt: String
+    let createdAt: String
+    let updatedAt: String
     let v: Int
 }
 
@@ -32,8 +32,8 @@ extension CompanyResponse {
             explanation: explanation,
             address: address,
             userId: userId,
-            createAt: createAt.toDate(format: .fullDate),
-            updateAt: updateAt.toDate(format: .fullDate),
+            createAt: createdAt.toDate(format: .fullDateWithMilliSecondTime),
+            updateAt: updatedAt.toDate(format: .fullDateWithMilliSecondTime),
             v: v
         )
     }

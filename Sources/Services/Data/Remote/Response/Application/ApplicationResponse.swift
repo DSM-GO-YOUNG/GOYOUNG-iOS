@@ -7,9 +7,9 @@ struct ApplicationResponse: Decodable {
         case jobOfferId = "job_offer_id"
         case content
         case result
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case v = "_v"
+        case createdAt
+        case updatedAt
+        case v = "__v"
     }
     let id: String
     let userId: String
