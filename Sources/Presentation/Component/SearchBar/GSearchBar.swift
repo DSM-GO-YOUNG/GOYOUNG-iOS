@@ -16,12 +16,11 @@ struct GSearchBar: View {
             }
         }
         .padding(.horizontal, 19)
-        .frame(height: 50)
+        .frame(width: 350, height: 40)
         .overlay(
             RoundedRectangle(cornerRadius: 50)
                 .stroke(Color.mainPink, lineWidth: 1)
         )
-        .padding(.top, 10)
     }
 }
 
