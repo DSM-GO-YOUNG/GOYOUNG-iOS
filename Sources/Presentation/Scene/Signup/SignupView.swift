@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct SignupView: View {
-    @State var phoneNumber: String = ""
-    @State var password: String = ""
-    @State var name: String = ""
+
+    @StateObject var viewModel = SignupViewModel()
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(spacing: 40) {
@@ -11,18 +11,23 @@ struct SignupView: View {
                 .frame(height: 50)
             Image.logo
                 .frame(width: 149, height: 142)
-            GTextField(placeholder: "전화번호", text: $phoneNumber)
-            GTextField(placeholder: "비밀번호", text: $password)
-            GTextField(placeholder: "이름", text: $name)
+            GTextField(placeholder: "전화번호", text: $viewModel.phoneNumber)
+            GTextField(placeholder: "비밀번호", text: $viewModel.password)
+            GTextField(placeholder: "이름", text: $viewModel.name)
                 .padding(.bottom, 33)
-            GFillButton(title: "회원가입", action: { })
+            GFillButton(title: "회원가입", action: viewModel.signup)
                 .padding(.bottom, 53)
             Spacer()
         }
+        .onChange(of: viewModel.isSuccess, perform: { isSuccess in
+            if isSuccess {
+                dismiss()
+            }
+        })
         .padding(.horizontal, 16)
+        .setNavigationBackButton()
+        .navigationBarBackButtonHidden()
         .background(Color.background)
-        .navigationTitle("회원가입")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
