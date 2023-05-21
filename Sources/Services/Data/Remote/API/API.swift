@@ -28,7 +28,7 @@ enum API {
 }
 
 extension API: TargetType {
-    var baseURL: URL { URL(string: "")! }
+    var baseURL: URL { URL(string: "http://43.201.51.10:3000")! }
 
     var path: String {
         switch self {
@@ -60,7 +60,7 @@ extension API: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .login, .signup, .registrationCompany, .searchCompany,.fetchCompany,
+        case .login, .signup, .registrationCompany, .searchCompany,
                 .registrationJobOffer, .editJobOffer, .registrationResult:
             return .post
         case .deleteJobOffer:
@@ -116,7 +116,13 @@ extension API: TargetType {
     }
 
     var headers: [String: String]? {
-        return nil
+        let token = LocalDataSourceImpl().fetchAccessToken()
+        switch self {
+        case .login, .signup:
+            return nil
+        default:
+            return ["Authorization": "Bearer \(token)"]
+        }
     }
 
 }
