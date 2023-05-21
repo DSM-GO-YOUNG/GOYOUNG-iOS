@@ -1,12 +1,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var text: String = ""
+
+    @StateObject var viewModel = HomeViewModel()
+
+    init() {
+        UINavigationBar.appearance().shadowImage = UIImage()
+    }
 
     var body: some View {
         NavigationView {
-            List(0..<10) { _ in
-                OfficeListCell()
+            List(viewModel.companyList, id: \.id) {
+                OfficeListCell(company: $0)
                     .listRowSeparator(.hidden)
             }
             .padding(.top, 20)
@@ -14,9 +19,13 @@ struct HomeView: View {
             .listStyle(.inset)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    GSearchBar(text: $text, action: { })
+                    GSearchBar(text: $viewModel.searchText, action: viewModel.searchCompany)
                 }
             }
+            .onChange(of: viewModel.searchText) { _ in
+                self.viewModel.searchCompany()
+            }
+            .onAppear(perform: viewModel.fetchCompany)
         }
     }
 }
