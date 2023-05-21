@@ -23,8 +23,8 @@ struct OnboardingView: View {
                 )
                 .padding(.bottom, 71)
             }
-            .background(Color.background)
             .padding(.horizontal, 16)
+            .background(Color.background)
         }
     }
 }
