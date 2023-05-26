@@ -28,12 +28,14 @@ final class RepositoryImpl: Repository {
         )
     }
     func registrationCompany(
+        image: Data,
         name: String,
         kind: String,
         explanation: String,
         address: String
     ) -> AnyPublisher<Void, NetworkError> {
         return remoteDataSource.registrationCompany(
+            image: image,
             name: name,
             kind: kind,
             explanation: explanation,
@@ -48,6 +50,9 @@ final class RepositoryImpl: Repository {
     }
     func fetchCompanyDetail(companyId: String) -> AnyPublisher<CompanyEntity, NetworkError> {
         return remoteDataSource.fetchCompanyDetail(companyId: companyId)
+    }
+    func fetchMyCompany() -> AnyPublisher<CompanyEntity, NetworkError> {
+        return remoteDataSource.fetchMyCompany()
     }
     func registrationJobOffer(companyId: String, request: JobOfferRequest) -> AnyPublisher<Void, NetworkError> {
         return remoteDataSource.registrationJobOffer(companyId: companyId, request: request)

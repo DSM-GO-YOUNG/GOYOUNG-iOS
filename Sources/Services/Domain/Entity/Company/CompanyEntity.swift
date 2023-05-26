@@ -6,6 +6,7 @@ struct CompanyEntity: Equatable {
     let kind: String
     let explanation: String
     let address: String
+    let image: URL?
     let userId: String
     let createAt: Date
     let updateAt: Date

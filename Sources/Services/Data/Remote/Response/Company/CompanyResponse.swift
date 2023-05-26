@@ -7,6 +7,7 @@ struct CompanyResponse: Decodable {
         case kind
         case explanation
         case address
+        case image
         case userId = "user_id"
         case createdAt
         case updatedAt
@@ -17,6 +18,7 @@ struct CompanyResponse: Decodable {
     let kind: String
     let explanation: String
     let address: String
+    let image: String
     let userId: String
     let createdAt: String
     let updatedAt: String
@@ -31,6 +33,7 @@ extension CompanyResponse {
             kind: kind,
             explanation: explanation,
             address: address,
+            image: URL(string: image),
             userId: userId,
             createAt: createdAt.toDate(format: .fullDateWithMilliSecondTime),
             updateAt: updatedAt.toDate(format: .fullDateWithMilliSecondTime),

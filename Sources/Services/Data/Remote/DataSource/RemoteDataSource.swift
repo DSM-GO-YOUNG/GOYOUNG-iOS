@@ -8,10 +8,11 @@ protocol RemoteDataSource {
     func signup(phoneNumber: String, password: String, name: String) -> AnyPublisher<Void, NetworkError>
 
     // company
-    func registrationCompany(name: String, kind: String, explanation: String, address: String) -> AnyPublisher<Void, NetworkError>
+    func registrationCompany(image: Data, name: String, kind: String, explanation: String, address: String) -> AnyPublisher<Void, NetworkError>
     func searchCompany(word: String) -> AnyPublisher<[CompanyEntity], NetworkError>
     func fetchCompany() -> AnyPublisher<[CompanyEntity], NetworkError>
     func fetchCompanyDetail(companyId: String) -> AnyPublisher<CompanyEntity, NetworkError>
+    func fetchMyCompany() -> AnyPublisher<CompanyEntity, NetworkError>
 
     // job-offer
     func registrationJobOffer(companyId: String, request: JobOfferRequest) -> AnyPublisher<Void, NetworkError>

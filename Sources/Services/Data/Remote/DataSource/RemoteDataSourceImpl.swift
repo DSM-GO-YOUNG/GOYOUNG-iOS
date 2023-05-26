@@ -23,12 +23,14 @@ final class RemoteDataSourceImpl: RemoteDataSource {
     }
 
     func registrationCompany(
+        image: Data,
         name: String,
         kind: String,
         explanation: String,
         address: String
     ) -> AnyPublisher<Void, NetworkError> {
         return provider.requestVoidPublisher(.registrationCompany(
+            image: image,
             name: name,
             kind: kind,
             explanation: explanation,
@@ -50,6 +52,12 @@ final class RemoteDataSourceImpl: RemoteDataSource {
 
     func fetchCompanyDetail(companyId: String) -> AnyPublisher<CompanyEntity, NetworkError> {
         return provider.requestPublisher(.fetchCompanyDetail(companyId: companyId), CompanyResponse.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
+    }
+
+    func fetchMyCompany() -> AnyPublisher<CompanyEntity, NetworkError> {
+        return provider.requestPublisher(.fetchMyCompany, CompanyResponse.self)
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }

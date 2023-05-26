@@ -8,10 +8,11 @@ enum API {
     case signup(phoneNumber: String, password: String, name: String)
 
     // company
-    case registrationCompany(name: String, kind: String, explanation: String, address: String)
+    case registrationCompany(image: Data, name: String, kind: String, explanation: String, address: String)
     case searchCompany(word: String)
     case fetchCompany
     case fetchCompanyDetail(companyId: String)
+    case fetchMyCompany
 
     // job-offer
     case registrationJobOffer(companyId: String, request: JobOfferRequest)
@@ -42,6 +43,8 @@ extension API: TargetType {
             return "/company/\(companyId)"
         case .searchCompany:
             return "/company/search"
+        case .fetchMyCompany:
+            return "/company/my"
         case .registrationJobOffer(let companyId, _):
             return "/job-offer?company=\(companyId)"
         case .editJobOffer(let jobOfferId, _), .deleteJobOffer(let jobOfferId),
@@ -97,6 +100,35 @@ extension API: TargetType {
                 ],
                 encoding: URLEncoding.default
             )
+        case .registrationCompany(let image, let name, let kind, let explanation, let address):
+            var multiformData = [MultipartFormData]()
+            multiformData.append(.init(
+                provider: .data(image),
+                name: "image",
+                fileName: "image.jpg",
+                mimeType: "image/jpg"
+            ))
+            multiformData.append(.init(
+                provider: .data(name.data(using: .utf8)!),
+                name: "name",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(kind.data(using: .utf8)!),
+                name: "kind",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(explanation.data(using: .utf8)!),
+                name: "explanation",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(address.data(using: .utf8)!),
+                name: "address",
+                mimeType: "text/plain"
+            ))
+            return .uploadMultipart(multiformData)
         case .registrationJobOffer(_, let request), .editJobOffer(_, let request):
             return .requestJSONEncodable(request)
         case .registrationResult(_, let result):
