@@ -6,16 +6,23 @@ private enum FocusedTextView {
 struct GTextView: View {
     let placeholder: String
     let text: Binding<String>
+    let isDisabled: Bool
 
-    init(placeholder: String, text: Binding<String>) {
+    init(
+        placeholder: String = "",
+        text: Binding<String>,
+        isDisabled: Bool = false
+    ) {
         self.placeholder = placeholder
         self.text = text
+        self.isDisabled = isDisabled
         UITextView.appearance().backgroundColor = .clear
     }
 
     var body: some View {
         ZStack(alignment: .topLeading) {
             TextEditor(text: text)
+                .disabled(isDisabled)
                 .padding(.top, 6)
                 .padding(.leading, 12)
                 .font(.suseongBatang(18))
@@ -32,7 +39,7 @@ struct GTextView: View {
         .cornerRadius(20)
         .overlay {
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.line, lineWidth: 1)
+                .stroke(isDisabled ? Color.mainGreen : .line, lineWidth: 1)
         }
     }
 }

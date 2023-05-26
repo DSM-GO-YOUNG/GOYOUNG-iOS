@@ -12,4 +12,8 @@ extension Image {
     static let selectedPeople = Image("SelectedPeople")
     static let selectedList = Image("SelectedList")
     static let selectedOffice = Image("SelectedOffice")
+
+    // Profile Icon
+    static let write = Image("Write")
+    static let company = Image("Company")
 }
