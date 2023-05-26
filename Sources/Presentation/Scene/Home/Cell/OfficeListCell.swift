@@ -6,10 +6,14 @@ struct OfficeListCell: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 20) {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .frame(width: 140, height: 130)
-                    .background(Color.gray)
+                AsyncImage(url: company.image) { image in
+                    image
+                        .resizable()
+                        .frame(width: 140, height: 130)
+                } placeholder: {
+                    Color.gray50
+                        .frame(width: 140, height: 130)
+                }
 
                 VStack(alignment: .leading, spacing: 0) {
                     Text(company.name)
