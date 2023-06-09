@@ -22,6 +22,7 @@ struct GTextField: View {
             .padding(.vertical, 16)
             .background(Color.white)
             .cornerRadius(50)
+            .font(.suseongBatang(18))
             .overlay {
                 RoundedRectangle(cornerRadius: 50)
                     .stroke(isDisabled ? Color.mainGreen : .line, lineWidth: 1)
