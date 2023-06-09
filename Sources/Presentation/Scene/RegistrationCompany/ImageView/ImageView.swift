@@ -10,14 +10,14 @@ struct ImageView: View {
                 image
                     .resizable()
                     .scaledToFill()
+                    .frame(width: 194, height: 194)
             } placeholder: {
                 Color.gray50
+                    .frame(width: 194, height: 194)
             }
-            .frame(width: 194, height: 194)
         } else {
             Image(uiImage: uiimage)
                 .resizable()
-                .scaledToFill()
                 .frame(width: 194, height: 194)
         }
     }
