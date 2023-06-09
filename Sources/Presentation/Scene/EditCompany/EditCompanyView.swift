@@ -19,7 +19,7 @@ struct EditCompanyView: View {
                 GTextField(placeholder: "회사 위치", text: $viewModel.address)
                 GTextView(placeholder: "상세 설명", text: $viewModel.content)
                     .frame(height: 223)
-                GFillButton(title: "등록하기", action: { })
+                GFillButton(title: "수정하기", action: viewModel.editCompany)
             }
             .photoPicker(
                 isPresented: $photoPickerIsPresented,
