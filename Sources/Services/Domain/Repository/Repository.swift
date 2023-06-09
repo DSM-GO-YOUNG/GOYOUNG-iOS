@@ -9,6 +9,7 @@ protocol Repository {
 
     // company
     func registrationCompany(image: Data, name: String, kind: String, explanation: String, address: String) -> AnyPublisher<Void, NetworkError>
+    func editCompany(image: Data, name: String, kind: String, explanation: String, address: String) -> AnyPublisher<Void, NetworkError>
     func searchCompany(word: String) -> AnyPublisher<[CompanyEntity], NetworkError>
     func fetchCompany() -> AnyPublisher<[CompanyEntity], NetworkError>
     func fetchCompanyDetail(companyId: String) -> AnyPublisher<CompanyEntity, NetworkError>

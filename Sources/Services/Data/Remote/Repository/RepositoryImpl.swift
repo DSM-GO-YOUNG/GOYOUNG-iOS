@@ -42,6 +42,21 @@ final class RepositoryImpl: Repository {
             address: address
         )
     }
+    func editCompany(
+        image: Data,
+        name: String,
+        kind: String,
+        explanation: String,
+        address: String
+    ) -> AnyPublisher<Void, NetworkError> {
+        return remoteDataSource.editCompany(
+            image: image,
+            name: name,
+            kind: kind,
+            explanation: explanation,
+            address: address
+        )
+    }
     func searchCompany(word: String) -> AnyPublisher<[CompanyEntity], NetworkError> {
         return remoteDataSource.searchCompany(word: word)
     }
