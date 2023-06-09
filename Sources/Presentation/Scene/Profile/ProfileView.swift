@@ -24,8 +24,8 @@ struct ProfileView: View {
                 )
                 ProfileButton(
                     image: .company,
-                    title: "회사 프로필 작성",
-                    destination: { Text("프로필 작성") }
+                    title: "회사 프로필 수정",
+                    destination: { EditCompanyView() }
                 )
                 Spacer()
                 NavigationLink(
