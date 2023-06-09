@@ -9,6 +9,7 @@ enum API {
 
     // company
     case registrationCompany(image: Data, name: String, kind: String, explanation: String, address: String)
+    case editCompany(image: Data, name: String, kind: String, explanation: String, address: String)
     case searchCompany(word: String)
     case fetchCompany
     case fetchCompanyDetail(companyId: String)
@@ -37,7 +38,7 @@ extension API: TargetType {
             return "/user/login"
         case .signup:
             return "/user"
-        case .registrationCompany, .fetchCompany:
+        case .registrationCompany, .fetchCompany, .editCompany:
             return "/company"
         case .fetchCompanyDetail(let companyId):
             return "/company/\(companyId)"
@@ -64,10 +65,12 @@ extension API: TargetType {
     var method: Moya.Method {
         switch self {
         case .login, .signup, .registrationCompany, .searchCompany,
-                .registrationJobOffer, .editJobOffer, .registrationResult:
+                .registrationJobOffer, .registrationResult:
             return .post
         case .deleteJobOffer:
             return .delete
+        case .editCompany, .editJobOffer:
+            return .patch
         default:
             return .get
         }
@@ -101,6 +104,35 @@ extension API: TargetType {
                 encoding: URLEncoding.default
             )
         case .registrationCompany(let image, let name, let kind, let explanation, let address):
+            var multiformData = [MultipartFormData]()
+            multiformData.append(.init(
+                provider: .data(image),
+                name: "image",
+                fileName: "image.jpg",
+                mimeType: "image/jpg"
+            ))
+            multiformData.append(.init(
+                provider: .data(name.data(using: .utf8)!),
+                name: "name",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(kind.data(using: .utf8)!),
+                name: "kind",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(explanation.data(using: .utf8)!),
+                name: "explanation",
+                mimeType: "text/plain"
+            ))
+            multiformData.append(.init(
+                provider: .data(address.data(using: .utf8)!),
+                name: "address",
+                mimeType: "text/plain"
+            ))
+            return .uploadMultipart(multiformData)
+        case .editCompany(let image, let name, let kind, let explanation, let address):
             var multiformData = [MultipartFormData]()
             multiformData.append(.init(
                 provider: .data(image),
