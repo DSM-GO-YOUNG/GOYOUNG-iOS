@@ -38,6 +38,22 @@ final class RemoteDataSourceImpl: RemoteDataSource {
         ))
     }
 
+    func editCompany(
+        image: Data,
+        name: String,
+        kind: String,
+        explanation: String,
+        address: String
+    ) -> AnyPublisher<Void, NetworkError> {
+        return provider.requestVoidPublisher(.registrationCompany(
+            image: image,
+            name: name,
+            kind: kind,
+            explanation: explanation,
+            address: address
+        ))
+    }
+
     func searchCompany(word: String) -> AnyPublisher<[CompanyEntity], NetworkError> {
         return provider.requestPublisher(.searchCompany(word: word), [CompanyResponse].self)
             .map { $0.map { $0.toDomain() } }
