@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ApplicationDetailView: View {
+    let id: String
+
     var body: some View {
         ScrollView {
             VStack {
@@ -26,7 +28,6 @@ struct ApplicationDetailView: View {
                         }
                         Spacer()
                     }
-                    
                     .font(.suseongBatang(16))
                     .padding(15)
                     .overlay {
@@ -53,14 +54,16 @@ struct ApplicationDetailView: View {
                 }
                 .padding(.bottom, 12)
                 HStack(spacing: 20) {
-                    Button("서류 탈락", action: { })
-                        .font(.suseongBatang(18))
-                        .foregroundColor(.white)
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 41)
-                        .background(Color.mainPink)
-                        .cornerRadius(50)
-                    Button("서류 합격", action: { })
+                    NavigationLink(destination: WriteReviewView()) {
+                        Text("후기 작성")
+                            .font(.suseongBatang(18))
+                            .foregroundColor(.white)
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 41)
+                            .background(Color.mainPink)
+                            .cornerRadius(50)
+                    }
+                    Button("면접 신청", action: { })
                         .font(.suseongBatang(18))
                         .foregroundColor(.white)
                         .padding(.vertical, 14)
@@ -72,12 +75,14 @@ struct ApplicationDetailView: View {
             .padding(.horizontal, 16)
             .navigationTitle("지원자 조회")
             .navigationBarTitleDisplayMode(.inline)
+            .setNavigationBackButton()
+            .navigationBarBackButtonHidden()
         }
     }
 }
 
 struct ApplicationDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplicationDetailView()
+        ApplicationDetailView(id: "")
     }
 }
